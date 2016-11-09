@@ -69,6 +69,30 @@ describe('immutability', () => {
       }));
     });
 
+    it('updateIn', () => {
+      let state = Map({
+        vote: Map({
+          pair: List.of('Trainspotting', '28 Days Later'),
+          tally: Map({
+            'Trainspotting': 4,
+            '28 Days Later': 2
+          })
+        }),
+        entries: List.of('Sunshine', 'Millions', '127 Hours')
+      });
+
+      expect(state.updateIn(['vote', 'tally', 'Trainspotting'], tally => tally * 2)).to.equal(Map({
+        vote: Map({
+          pair: List.of('Trainspotting', '28 Days Later'),
+          tally: Map({
+            'Trainspotting': 8,
+            '28 Days Later': 2
+          })
+        }),
+        entries: List.of('Sunshine', 'Millions', '127 Hours')
+      }));
+    });
+
   });
 
 
